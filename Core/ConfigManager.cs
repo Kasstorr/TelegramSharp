@@ -6,7 +6,7 @@ using System;
 
 
 namespace Core {
-	public static class IoManager {
+	public static class ConfigManager {
 		static string configPath;
 
 		public static BotSetup LoadConfig (string ConfigPath = "TelegramBotConfig.json") {

@@ -5,10 +5,16 @@ using Modules.QChat;
 namespace Core.Objects {
 	[DataContract]
 	public class BotSetup {
-		[DataMember (Name = "BotToken")] public string BotToken{ get; set; }
+		[DataMember] public string BotToken{ get; set; }
 
-		[DataMember (Name = "QChatModule")] public List<QChatAnswer> QChatModule{ get; set; }
+		[DataMember] public List<QChatAnswer> QChatModule{ get; set; }
 
-		[DataMember (Name = "OwnerId")] public int OwnerId{ get; set; }
+		[DataMember] public int OwnerId{ get; set; }
+
+		[DataMember] public bool MeEnabled{ get; set; }
+
+		[DataMember] public bool BotStatsEnabled{ get; set; }
+
+		[DataMember] public bool QChatAnswersEnabled{ get; set; }
 	}
 }
