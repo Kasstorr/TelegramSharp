@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E5C69981-038D-4B75-B715-B2DAADFD427E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>TelegramAPI</RootNamespace>
+    <AssemblyName>TelegramAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Net" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Core\IOManager.cs" />
+    <Compile Include="Core\JSONDataManager.cs" />
+    <Compile Include="Core\MessageParser.cs" />
+    <Compile Include="Core\NetManaging.cs" />
+    <Compile Include="Core\Objects\BotSetup.cs" />
+    <Compile Include="Core\Objects\NetAPI\Audio.cs" />
+    <Compile Include="Core\Objects\NetAPI\Chat.cs" />
+    <Compile Include="Core\Objects\NetAPI\Contact.cs" />
+    <Compile Include="Core\Objects\NetAPI\Document.cs" />
+    <Compile Include="Core\Objects\NetAPI\File.cs" />
+    <Compile Include="Core\Objects\NetAPI\ForceReply.cs" />
+    <Compile Include="Core\Objects\NetAPI\GetMeServerUpdate.cs" />
+    <Compile Include="Core\Objects\NetAPI\Location.cs" />
+    <Compile Include="Core\Objects\NetAPI\LoggableMessage.cs" />
+    <Compile Include="Core\Objects\NetAPI\Message.cs" />
+    <Compile Include="Core\Objects\NetAPI\MessageServerUpdate.cs" />
+    <Compile Include="Core\Objects\NetAPI\PhotoSize.cs" />
+    <Compile Include="Core\Objects\NetAPI\ReplyKeyboardHide.cs" />
+    <Compile Include="Core\Objects\NetAPI\ReplyKeyboardMarkup.cs" />
+    <Compile Include="Core\Objects\NetAPI\Sticker.cs" />
+    <Compile Include="Core\Objects\NetAPI\Update.cs" />
+    <Compile Include="Core\Objects\NetAPI\User.cs" />
+    <Compile Include="Core\Objects\NetAPI\UserProfilePhotos.cs" />
+    <Compile Include="Core\Objects\NetAPI\Video.cs" />
+    <Compile Include="Core\Objects\NetAPI\Voice.cs" />
+    <Compile Include="Core\Objects\OutgoingMessage.cs" />
+    <Compile Include="Modules\Logger\LoggedMessage.cs" />
+    <Compile Include="Modules\Logger\Logger.cs" />
+    <Compile Include="Modules\QChat\QChatAnswer.cs" />
+    <Compile Include="Core\TelegramBot.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Core\" />
+    <Folder Include="Modules\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
