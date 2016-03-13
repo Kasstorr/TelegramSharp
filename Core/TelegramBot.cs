@@ -3,7 +3,6 @@ using System.Diagnostics;
 using Core;
 using Core.Objects;
 using Core.Objects.NetAPI;
-using System.Threading;
 
 namespace Core {
 	/// <summary>
@@ -35,14 +34,19 @@ namespace Core {
 			UpTimeCounter.Start ();
 
 			Console.WriteLine ("Getting bot account data");
-			string getme = NetManaging.GetMe (Cfg.BotToken); 
-			if (JSON.DeserializeAndParseGetMe (getme, this) != null) {
-				string s = NetManaging.GetUpdates (Cfg.BotToken);
-				JSON.DeserializeAndParseMessages (s, this);
-				while (true) {
-					s = NetManaging.GetUpdates (Cfg.BotToken, JSON.Offset + 1, 60);
+			try {
+				string getme = NetManaging.GetMe (Cfg.BotToken); 
+				if (JSON.DeserializeAndParseGetMe (getme, this) != null) {
+					string s = NetManaging.GetUpdates (Cfg.BotToken);
 					JSON.DeserializeAndParseMessages (s, this);
+					while (true) {
+						s = NetManaging.GetUpdates (Cfg.BotToken, JSON.Offset + 1, 60);
+						JSON.DeserializeAndParseMessages (s, this);
+					}
 				}
+			} catch (Exception e) {
+				Console.WriteLine ("WebException generated, see Error.log");
+				System.IO.File.AppendAllText ("Error.log", "\nError generated on " + DateTime.Now.ToString () + "\n" + e.ToString ());
 			}
 		}
 
@@ -55,5 +59,3 @@ namespace Core {
 		}
 	}
 }
-
-

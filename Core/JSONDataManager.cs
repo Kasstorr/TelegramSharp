@@ -19,12 +19,17 @@ namespace Core {
 		/// <param name="inJson">JSON to deserialize.</param>
 		/// <param name="bot">Bot that should parse the message.</param>
 		public void DeserializeAndParseMessages (string inJson, TelegramBot bot) {
-			MessageServerUpdate serverUpdate = JsonConvert.DeserializeObject<MessageServerUpdate> (inJson);
-			if (serverUpdate.Result != null) {
-				foreach (Update upd in serverUpdate.Result) {
-					Offset = upd.UpdateId;
-					MessageParser.ParseMessage (upd.Message, bot);
+			try {
+				MessageServerUpdate serverUpdate = JsonConvert.DeserializeObject<MessageServerUpdate> (inJson);
+				if (serverUpdate.Result != null) {
+					foreach (Update upd in serverUpdate.Result) {
+						Offset = upd.UpdateId;
+						MessageParser.ParseMessage (upd.Message, bot);
+					}
 				}
+			} catch (JsonReaderException) {
+				Console.WriteLine ("ERROR: Server not returned a valid JSON, chek your token and connection.");
+				Console.WriteLine ("Returned from the website: " + inJson);
 			}
 		}
 
