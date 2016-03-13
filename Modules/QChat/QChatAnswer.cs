@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json.Serialization;
 
 namespace Modules.QChat {
+	/// <summary>
+	/// QChatAnswer.
+	/// </summary>
 	[DataContract]
 	public class QChatAnswer {
 		[DataMember (Name = "Triggers")] List<string> _triggers = new List<string> ();
@@ -12,7 +15,10 @@ namespace Modules.QChat {
 		[DataMember (IsRequired = false, Name = "Restricted")] bool _restricted = false;
 		[DataMember (Name = "RandomizeAnswers")] bool _randomizeAnswers = false;
 
-
+		/// <summary>
+		/// Gets or sets the triggers.
+		/// </summary>
+		/// <value>The triggers.</value>
 		public List<string> Triggers {
 			get {
 				return _triggers;
@@ -23,6 +29,10 @@ namespace Modules.QChat {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the answers.
+		/// </summary>
+		/// <value>The answers.</value>
 		public List<string> Answers {
 			get {
 				return _answers;
@@ -33,6 +43,10 @@ namespace Modules.QChat {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the allowed Ids.
+		/// </summary>
+		/// <value>The allowed I ds.</value>
 		public List<int> AllowedIDs {
 			get {
 				return _allowedIDs;
@@ -43,6 +57,10 @@ namespace Modules.QChat {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the banned Ids.
+		/// </summary>
+		/// <value>The banned I ds.</value>
 		public List<int> BannedIDs {
 			get {
 				return _bannedIDs;
@@ -53,6 +71,10 @@ namespace Modules.QChat {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="Modules.QChat.QChatAnswer"/> randomize answers.
+		/// </summary>
+		/// <value><c>true</c> if randomize answers; otherwise, <c>false</c>.</value>
 		public bool RandomizeAnswers {
 			get {
 				return _randomizeAnswers;
@@ -63,6 +85,10 @@ namespace Modules.QChat {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="Modules.QChat.QChatAnswer"/> is restricted.
+		/// </summary>
+		/// <value><c>true</c> if restricted; otherwise, <c>false</c>.</value>
 		public bool Restricted {
 			get {
 				return _restricted;
@@ -73,10 +99,21 @@ namespace Modules.QChat {
 			}
 		}
 
-		public QChatAnswer () {
-            
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Modules.QChat.QChatAnswer"/> class.
+		/// </summary>
+		public QChatAnswer () { 
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Modules.QChat.QChatAnswer"/> class.
+		/// </summary>
+		/// <param name="triggerStrings">Trigger strings.</param>
+		/// <param name="answersStrings">Answers strings.</param>
+		/// <param name="allowedIdInts">Allowed identifier ints.</param>
+		/// <param name="bannedIdsInts">Banned identifiers ints.</param>
+		/// <param name="randomizeAnswers">If set to <c>true</c> randomize answers.</param>
+		/// <param name="restricted">If set to <c>true</c> restricted.</param>
 		public QChatAnswer (string[] triggerStrings, string[] answersStrings, int[] allowedIdInts, int[] bannedIdsInts, bool randomizeAnswers = false, bool restricted = false) {
 			foreach (string trigger in triggerStrings)
 				Triggers.Add (trigger);
