@@ -35,6 +35,9 @@ namespace TelegramSharp.Core {
 
 			Console.WriteLine ("Getting bot account data");
 			try {
+				if (Cfg == null) {
+					Console.WriteLine ("Missing configuration, compile the generated config file and restart the program.");
+				}
 				string getme = NetManaging.GetMe (Cfg.BotToken); 
 				if (JSON.DeserializeAndParseGetMe (getme, this) != null) {
 					string s = NetManaging.GetUpdates (Cfg.BotToken);
