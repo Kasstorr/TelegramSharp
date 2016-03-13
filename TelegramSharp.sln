@@ -7,12 +7,18 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E5C69981-038D-4B75-B715-B2DAADFD427E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E5C69981-038D-4B75-B715-B2DAADFD427E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5C69981-038D-4B75-B715-B2DAADFD427E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E5C69981-038D-4B75-B715-B2DAADFD427E}.Debug|x86.Build.0 = Debug|Any CPU
 		{E5C69981-038D-4B75-B715-B2DAADFD427E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5C69981-038D-4B75-B715-B2DAADFD427E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5C69981-038D-4B75-B715-B2DAADFD427E}.Release|x86.ActiveCfg = Release|Any CPU
+		{E5C69981-038D-4B75-B715-B2DAADFD427E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
@@ -21,5 +27,6 @@ Global
 		$1.ResourceNamePolicy = MSBuild
 		$0.VersionControlPolicy = $2
 		$2.inheritsSet = Mono
+		version = 0.2
 	EndGlobalSection
 EndGlobal

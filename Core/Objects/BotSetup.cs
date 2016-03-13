@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using TelegramSharp.Modules.QChat;
+using System;
 
 namespace TelegramSharp.Core.Objects {
 	/// <summary>
@@ -25,7 +26,7 @@ namespace TelegramSharp.Core.Objects {
 		/// Gets or sets the Qchatmodule.
 		/// </summary>
 		/// <value>The Q chat module.</value>
-		[DataMember] public List<QChatAnswer> QChatModule{ get; set; }
+		[DataMember] public List<QChatAnswer> QChatModule{ get; set; } = new List<QChatAnswer>();
 
 		/// <summary>
 		/// Gets or sets the owner identifier.
