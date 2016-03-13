@@ -1,5 +1,5 @@
 using TelegramSharp.Core.Objects;
-using Modules.QChat;
+using TelegramSharp.Modules.QChat;
 using Newtonsoft.Json;
 using System;
 

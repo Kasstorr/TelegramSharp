@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Modules.QChat;
+using TelegramSharp.Modules.QChat;
 
 namespace TelegramSharp.Core.Objects {
 	/// <summary>
