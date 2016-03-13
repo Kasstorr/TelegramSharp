@@ -1,9 +1,9 @@
 using System;
-using Core.Objects.NetAPI;
-using Modules.Logger;
+using TelegramSharp.Core.Objects.NetAPI;
+using TelegramSharp.Modules.Logger;
 using Newtonsoft.Json;
 
-namespace Core {
+namespace TelegramSharp.Core {
 	/// <summary>
 	/// Json data manager.
 	/// </summary>

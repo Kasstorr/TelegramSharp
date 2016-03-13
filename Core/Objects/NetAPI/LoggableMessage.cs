@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Objects.NetAPI {
+namespace TelegramSharp.Core.Objects.NetAPI {
 	/// <summary>
 	/// Loggable message.
 	/// </summary>

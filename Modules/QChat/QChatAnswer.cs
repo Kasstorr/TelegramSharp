@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Serialization;
 
-namespace Modules.QChat {
+namespace TelegramSharp.Modules.QChat {
 	/// <summary>
 	/// QChatAnswer.
 	/// </summary>

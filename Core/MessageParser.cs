@@ -1,9 +1,9 @@
-using Core.Objects.NetAPI;
-using Modules.QChat;
-using Core;
+using TelegramSharp.Core.Objects.NetAPI;
+using TelegramSharp.Modules.QChat;
+using TelegramSharp.Core;
 using System;
 
-namespace Core {
+namespace TelegramSharp.Core {
 	/// <summary>
 	/// Message parser.
 	/// </summary>
