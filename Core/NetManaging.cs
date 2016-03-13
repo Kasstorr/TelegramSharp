@@ -2,9 +2,8 @@ using System;
 using System.IO;
 using System.Net;
 using System.Text;
-using Newtonsoft.Json.Serialization;
 
-namespace Core {
+namespace TelegramSharp.Core {
 	/// <summary>
 	/// Network operations.
 	/// </summary>

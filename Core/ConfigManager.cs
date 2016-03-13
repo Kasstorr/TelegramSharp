@@ -1,11 +1,10 @@
-using System.IO;
-using Core.Objects;
-using Modules.QChat;
+using TelegramSharp.Core.Objects;
+using TelegramSharp.Modules.QChat;
 using Newtonsoft.Json;
 using System;
 
 
-namespace Core {
+namespace TelegramSharp.Core {
 	/// <summary>
 	/// Bot configuration manager.
 	/// </summary>
@@ -20,8 +19,8 @@ namespace Core {
 		public static BotSetup LoadConfig (string ConfigPath = "TelegramBotConfig.json") {
 			configPath = ConfigPath;
 			BotSetup config = new BotSetup ();
-			if (File.Exists (configPath)) {
-				string jsonconfig = File.ReadAllText (configPath);
+			if (System.IO.File.Exists (configPath)) {
+				string jsonconfig = System.IO.File.ReadAllText (configPath);
 
 				try {
 					config = JsonConvert.DeserializeObject<BotSetup> (jsonconfig);
@@ -44,7 +43,7 @@ namespace Core {
 		/// <param name="config">Config.</param>
 		public static void SaveConfig (BotSetup config) {
 			string json = JsonConvert.SerializeObject (config, Formatting.Indented);
-			File.WriteAllText (configPath, json);
+			System.IO.File.WriteAllText (configPath, json);
 		}
 	}
 }

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Modules.QChat;
+using TelegramSharp.Modules.QChat;
 
-namespace Core.Objects {
+namespace TelegramSharp.Core.Objects {
 	/// <summary>
 	/// Bot configuration.
 	/// </summary>
