@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using System.Configuration;
-using Core.Objects.NetAPI;
+using TelegramSharp.Core.Objects.NetAPI;
 
-namespace Modules.Logger {
+namespace TelegramSharp.Modules.Logger {
 	/// <summary>
 	/// Logged message.
 	/// </summary>

@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Core.Objects.NetAPI {
+namespace TelegramSharp.Core.Objects.NetAPI {
 	/// <summary>
 	/// A server update containing the bot user informations.
 	/// </summary>

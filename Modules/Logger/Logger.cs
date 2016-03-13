@@ -1,9 +1,9 @@
 using System;
-using Core.Objects.NetAPI;
+using TelegramSharp.Core.Objects.NetAPI;
 using Newtonsoft.Json;
-using Modules.Logger;
+using TelegramSharp.Modules.Logger;
 
-namespace Modules.Logger {
+namespace TelegramSharp.Modules.Logger {
 	/// <summary>
 	/// Message Logger.
 	/// </summary>

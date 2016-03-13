@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Core.Objects {
+namespace TelegramSharp.Core.Objects {
 	/// <summary>
 	/// Message parse mode.
 	/// </summary>

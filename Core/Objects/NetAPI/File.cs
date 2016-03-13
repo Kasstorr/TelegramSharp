@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Core.Objects.NetAPI {
+namespace TelegramSharp.Core.Objects.NetAPI {
 	/// <summary>
 	/// File.
 	/// </summary>

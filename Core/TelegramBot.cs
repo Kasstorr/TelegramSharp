@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
-using Core;
-using Core.Objects;
-using Core.Objects.NetAPI;
+using TelegramSharp.Core;
+using TelegramSharp.Core.Objects;
+using TelegramSharp.Core.Objects.NetAPI;
 
-namespace Core {
+namespace TelegramSharp.Core {
 	/// <summary>
 	/// Telegram bot.
 	/// </summary>
