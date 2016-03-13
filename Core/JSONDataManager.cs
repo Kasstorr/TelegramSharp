@@ -40,6 +40,7 @@ namespace TelegramSharp.Core {
 					foreach (Update upd in serverUpdate.Result) {
 						Offset = upd.UpdateId;
 						MessageParser.ParseMessage (upd.Message, bot);
+						Logger.LogConsoleWrite (new LoggableMessage (upd.Message, bot.BotIdentity));
 					}
 				}
 			} catch (JsonReaderException) {
