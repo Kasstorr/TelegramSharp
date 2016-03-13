@@ -4,15 +4,29 @@ using Core;
 using System;
 
 namespace Core {
+	/// <summary>
+	/// Message parser.
+	/// </summary>
 	public static class MessageParser {
+		/// <summary>
+		/// The parsed messages count.
+		/// </summary>
 		public static int parsedMessagesCount = 0;
+		/// <summary>
+		/// The commands parsed count.
+		/// </summary>
 		public static int commandsParsed = 0;
 
-		public static long ToUnixTime (this DateTime date) {
+		static long ToUnixTime (this DateTime date) {
 			var epoch = new DateTime (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 			return Convert.ToInt64 ((date.ToUniversalTime () - epoch).TotalSeconds);
 		}
 
+		/// <summary>
+		/// Parses the message.
+		/// </summary>
+		/// <param name="msg">Message to parse.</param>
+		/// <param name="bot">Bot that should parse the message.</param>
 		public static void ParseMessage (Message msg, TelegramBot bot) {
 			parsedMessagesCount++;
 			if (msg.Text != null && msg.Date >= ToUnixTime (DateTime.UtcNow) - 10) {

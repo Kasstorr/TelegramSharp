@@ -6,9 +6,17 @@ using System;
 
 
 namespace Core {
+	/// <summary>
+	/// Bot configuration manager.
+	/// </summary>
 	public static class ConfigManager {
 		static string configPath;
 
+		/// <summary>
+		/// Loads the configuration from the specified file path.
+		/// </summary>
+		/// <returns>The config.</returns>
+		/// <param name="ConfigPath">Config path.</param>
 		public static BotSetup LoadConfig (string ConfigPath = "TelegramBotConfig.json") {
 			configPath = ConfigPath;
 			BotSetup config = new BotSetup ();
@@ -30,6 +38,10 @@ namespace Core {
 			return config;
 		}
 
+		/// <summary>
+		/// Saves the config.
+		/// </summary>
+		/// <param name="config">Config.</param>
 		public static void SaveConfig (BotSetup config) {
 			string json = JsonConvert.SerializeObject (config, Formatting.Indented);
 			File.WriteAllText (configPath, json);
