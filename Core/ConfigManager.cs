@@ -34,7 +34,7 @@ namespace TelegramSharp.Core {
 			config.OwnerId = 0;
 			config.QChatModule.Add (new QChatAnswer (new[] { "ping", "pong" }, new string[1] { "answer" }, new int[0], new int[0], false));
 			SaveConfig (config);
-			return config;
+			return null;
 		}
 
 		/// <summary>
