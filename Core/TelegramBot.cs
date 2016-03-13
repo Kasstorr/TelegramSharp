@@ -55,11 +55,11 @@ namespace TelegramSharp.Core {
 				}
 				string getme = NetManaging.GetMe (Cfg.BotToken); 
 				if (JSON.DeserializeAndParseGetMe (getme, this) != null) {
-					string s = NetManaging.GetUpdates (Cfg.BotToken);
-					JSON.DeserializeAndParseMessages (s, this);
 					while (true) {
-						s = NetManaging.GetUpdates (Cfg.BotToken, JSON.Offset + 1, 60);
-						JSON.DeserializeAndParseMessages (s, this);
+						string s = NetManaging.GetUpdates (Cfg.BotToken, JSON.Offset + 1, 60);
+						if (s != null) {
+							JSON.DeserializeAndParseMessages (s, this);
+						}
 					}
 				}
 			} catch (Exception e) {
