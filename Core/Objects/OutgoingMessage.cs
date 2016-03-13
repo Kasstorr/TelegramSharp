@@ -2,10 +2,23 @@ using System;
 using System.Runtime.Serialization;
 
 namespace Core.Objects {
+	/// <summary>
+	/// Message parse mode.
+	/// </summary>
 	public enum ParseMode {
-		MarkDown
+		/// <summary>
+		/// Parse the message as containing markdown
+		/// </summary>
+		MarkDown,
+		/// <summary>
+		/// Parse the message as containing HTML
+		/// </summary>
+		HTML
 	}
 
+	/// <summary>
+	/// Outgoing message.
+	/// </summary>
 	[DataContract]
 	public class OutgoingMessage {
 		[DataMember (Name = "chat_id")] private int _chatId;
@@ -14,6 +27,10 @@ namespace Core.Objects {
 		[DataMember (Name = "disable_web_page_preview")] private bool _disableWebPagePreview;
 		[DataMember (Name = "reply_to_message_id")] private int _replyToMessageId;
 
+		/// <summary>
+		/// Gets or sets the chat identifier.
+		/// </summary>
+		/// <value>The chat identifier.</value>
 		public int ChatId {
 			get {
 				return _chatId;
@@ -24,6 +41,10 @@ namespace Core.Objects {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the text.
+		/// </summary>
+		/// <value>The text.</value>
 		public string Text {
 			get {
 				return _text;
@@ -34,6 +55,10 @@ namespace Core.Objects {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the parse mode.
+		/// </summary>
+		/// <value>The parse mode.</value>
 		public string ParseMode {
 			get {
 				if (_parseMode == Objects.ParseMode.MarkDown)
@@ -46,6 +71,10 @@ namespace Core.Objects {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="Core.Objects.OutgoingMessage"/> disable web page preview.
+		/// </summary>
+		/// <value><c>true</c> if disable web page preview; otherwise, <c>false</c>.</value>
 		public bool DisableWebPagePreview {
 			get {
 				return _disableWebPagePreview;
@@ -56,6 +85,10 @@ namespace Core.Objects {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the reply to message identifier.
+		/// </summary>
+		/// <value>The reply to message identifier.</value>
 		public int ReplyToMessageId {
 			get {
 				return _replyToMessageId;

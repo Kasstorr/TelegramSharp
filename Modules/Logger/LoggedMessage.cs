@@ -4,6 +4,9 @@ using System.Configuration;
 using Core.Objects.NetAPI;
 
 namespace Modules.Logger {
+	/// <summary>
+	/// Logged message.
+	/// </summary>
 	[DataContract]
 	public class LoggedMessage {
 		[DataMember] int userID;
@@ -14,6 +17,10 @@ namespace Modules.Logger {
 		[DataMember] int unixTimeSent;
 		[DataMember] string msgText;
 
+		/// <summary>
+		/// Gets or sets the user ID.
+		/// </summary>
+		/// <value>The user I.</value>
 		public int UserID {
 			get {
 				return userID;
@@ -23,6 +30,10 @@ namespace Modules.Logger {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the name of the user.
+		/// </summary>
+		/// <value>The name of the user.</value>
 		public string UserName {
 			get {
 				return userName;
@@ -32,6 +43,10 @@ namespace Modules.Logger {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the display name.
+		/// </summary>
+		/// <value>The display name.</value>
 		public string DisplayName {
 			get {
 				return displayName;
@@ -41,6 +56,10 @@ namespace Modules.Logger {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the chat ID.
+		/// </summary>
+		/// <value>The chat I.</value>
 		public int ChatID {
 			get {
 				return chatID;
@@ -50,6 +69,10 @@ namespace Modules.Logger {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the name of the chat.
+		/// </summary>
+		/// <value>The name of the chat.</value>
 		public string ChatName {
 			get {
 				return chatName;
@@ -59,6 +82,10 @@ namespace Modules.Logger {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the unix time when the message was sent.
+		/// </summary>
+		/// <value>The unix time sent.</value>
 		public int UnixTimeSent {
 			get {
 				return unixTimeSent;
@@ -68,6 +95,10 @@ namespace Modules.Logger {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the message text.
+		/// </summary>
+		/// <value>The message text.</value>
 		public string MsgText {
 			get {
 				return msgText;
@@ -77,6 +108,10 @@ namespace Modules.Logger {
 			}
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Modules.Logger.LoggedMessage"/> class.
+		/// </summary>
+		/// <param name="toLog">To log.</param>
 		public LoggedMessage (Message toLog) {
 			UserID = toLog.From.Id;
 			UserName = toLog.From.Username;

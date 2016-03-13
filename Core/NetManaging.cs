@@ -4,8 +4,18 @@ using System.Net;
 using System.Text;
 
 namespace Core {
+	/// <summary>
+	/// Network operations.
+	/// </summary>
 	public static class NetManaging {
-		//Receives the messages
+		/// <summary>
+		/// Gets the updates containing messages.
+		/// </summary>
+		/// <returns>The updates.</returns>
+		/// <param name="token">Bot Token.</param>
+		/// <param name="offset">Update offset.</param>
+		/// <param name="limit">Limit of messages in a update.</param>
+		/// <param name="timeout">Request timeout (if 0 short polling, else long polling).</param>
 		public static string GetUpdates (string token, int offset = 0, int limit = 100, int timeout = 60) {
 			// Create a request
 			WebRequest request = WebRequest.Create (CombineUri ("https://api.telegram.org/bot", token) + "/getUpdates");
@@ -27,7 +37,15 @@ namespace Core {
 			return _out; // Return the value
 		}
 
-		//invia un messaggio
+		/// <summary>
+		/// Sends the message.
+		/// </summary>
+		/// <param name="token">Bot Token.</param>
+		/// <param name="chatId">Chat identifier.</param>
+		/// <param name="text">Message text.</param>
+		/// <param name="parseMode">Parse mode.</param>
+		/// <param name="disableWebPagePreview">If set to <c>true</c> disable web page preview.</param>
+		/// <param name="replyToMessageId">Reply to message identifier.</param>
 		public static void SendMessage (string token, int chatId, string text, string parseMode = "", bool disableWebPagePreview = false, int replyToMessageId = 0) {
 			// Create a request
 			WebRequest request = WebRequest.Create (CombineUri ("https://api.telegram.org/bot", token) + "/sendMessage");
@@ -47,7 +65,11 @@ namespace Core {
 			response.Close ();
 		}
 
-		//Controlla l'esistenza del bot token associato e che i servizi telegram siano attivi
+		/// <summary>
+		/// Gets Bot user information.
+		/// </summary>
+		/// <returns>The <c>User</c> containing the bot acocunt infos.</returns>
+		/// <param name="token">Bot token.</param>
 		public static string GetMe (string token) {
 			// Create a request
 			WebRequest request = WebRequest.Create (CombineUri ("https://api.telegram.org/bot", token) + "/getMe");
