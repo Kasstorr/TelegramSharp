@@ -36,7 +36,6 @@ namespace TelegramSharp.Core.Objects {
 		/// <value><c>true</c> if Q chat answers enabled; otherwise, <c>false</c>.</value>
 		[DataMember] public bool QChatAnswersEnabled{ get; set; }
 
-
 		/// <summary>
 		/// Gets or sets the Qchatmodule.
 		/// </summary>

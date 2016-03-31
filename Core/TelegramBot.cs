@@ -24,6 +24,10 @@ namespace TelegramSharp.Core {
 	/// Telegram bot.
 	/// </summary>
 	public class TelegramBot {
+
+        //public event EventArgs received message
+
+
 		/// <summary>
 		/// The configuration file for this bot.
 		/// </summary>
