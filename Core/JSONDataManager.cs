@@ -39,7 +39,8 @@ namespace TelegramSharp.Core {
 				if (serverUpdate.Result != null) {
 					foreach (Update upd in serverUpdate.Result) {
 						Offset = upd.UpdateId;
-						MessageParser.ParseMessage (upd.Message, bot);
+                        MessageParser MSGP = new MessageParser();
+						MSGP.ParseMessage (upd.Message, bot);
 						Logger.LogConsoleWrite (new LoggableMessage (upd.Message, bot.BotIdentity));
 					}
 				}

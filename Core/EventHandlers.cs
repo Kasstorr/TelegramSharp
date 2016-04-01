@@ -1,8 +1,13 @@
-﻿using TelegramSharp.Core.Objects.NetAPI;
+﻿using System;
+using TelegramSharp.Core.Objects.NetAPI;
 
 namespace TelegramSharp.Core {
-    public class BotEvents {
-        public delegate void MessageReceivedHandler(Message receivedMessage, User fromBot);
-        public event MessageReceivedHandler MessageReceived;
+    public class MessageReceivedArgs : EventArgs {
+        Message Message;
+        User FromBot;
+        public MessageReceivedArgs(Message msg, User bot) {
+            Message = msg;
+            FromBot = bot;
+        }
     }
 }
