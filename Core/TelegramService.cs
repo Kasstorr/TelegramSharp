@@ -38,6 +38,7 @@ namespace TelegramSharp.Core {
 		/// The bot identity.
 		/// </summary>
 		public User BotIdentity;
+        public MessageParser Parser;
 
 		/// <summary>
 		/// Start the bot. Use this method as thread, as is going to use an infinite loop.
@@ -45,6 +46,7 @@ namespace TelegramSharp.Core {
 		public void Start () {
 			JsonDataManager JSON = new JsonDataManager ();
 			Console.WriteLine ("Loaded TelegramSharp V0.2!");
+            Parser = new MessageParser();
 			Console.WriteLine ("Listener Started");
 			UpTimeCounter = new Stopwatch ();
 			UpTimeCounter.Start ();
