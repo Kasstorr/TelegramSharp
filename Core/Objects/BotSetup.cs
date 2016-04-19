@@ -15,7 +15,6 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using TelegramSharp.Modules.QChat;
 using System;
 
 namespace TelegramSharp.Core.Objects {
@@ -35,12 +34,6 @@ namespace TelegramSharp.Core.Objects {
 		/// </summary>
 		/// <value><c>true</c> if Q chat answers enabled; otherwise, <c>false</c>.</value>
 		[DataMember] public bool QChatAnswersEnabled{ get; set; }
-
-		/// <summary>
-		/// Gets or sets the Qchatmodule.
-		/// </summary>
-		/// <value>The Q chat module.</value>
-		[DataMember] public List<QChatAnswer> QChatModule{ get; set; } = new List<QChatAnswer>();
 
 		/// <summary>
 		/// Gets or sets the owner identifier.

@@ -33,7 +33,7 @@ namespace TelegramSharp.Core {
 		/// </summary>
 		/// <param name="inJson">JSON to deserialize.</param>
 		/// <param name="bot">Bot that should parse the message.</param>
-		public void DeserializeAndParseMessages (string inJson, TelegramBot bot) {
+		public void DeserializeAndParseMessages (string inJson, TelegramService bot) {
 			try {
 				MessageServerUpdate serverUpdate = JsonConvert.DeserializeObject<MessageServerUpdate> (inJson);
 				if (serverUpdate.Result != null) {
@@ -56,7 +56,7 @@ namespace TelegramSharp.Core {
 		/// <returns>Bot user information</returns>
 		/// <param name="inJson">JSON to deserialize.</param>
 		/// <param name="bot">Bot that should parse the message.</param>
-		public User DeserializeAndParseGetMe (string inJson, TelegramBot bot) {
+		public User DeserializeAndParseGetMe (string inJson, TelegramService bot) {
 			try {
 				GetMeServerUpdate serverUpdate = JsonConvert.DeserializeObject<GetMeServerUpdate> (inJson);
 				if (serverUpdate.GetMe != null)

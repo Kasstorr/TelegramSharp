@@ -14,7 +14,6 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using TelegramSharp.Core.Objects;
-using TelegramSharp.Modules.QChat;
 using Newtonsoft.Json;
 using System;
 
@@ -47,7 +46,6 @@ namespace TelegramSharp.Core {
 			config = new BotSetup ();
 			config.BotToken = "your token here";
 			config.OwnerId = 0;
-			config.QChatModule.Add (new QChatAnswer (new[] { "ping", "pong" }, new string[1] { "answer" }, new int[0], new int[0], false));
 			SaveConfig (config);
 			return null;
 		}

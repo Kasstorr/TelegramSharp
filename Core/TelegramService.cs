@@ -15,6 +15,7 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Diagnostics;
+using System.Threading;
 using TelegramSharp.Core;
 using TelegramSharp.Core.Objects;
 using TelegramSharp.Core.Objects.NetAPI;
@@ -23,10 +24,7 @@ namespace TelegramSharp.Core {
 	/// <summary>
 	/// Telegram bot.
 	/// </summary>
-	public class TelegramBot {
-
-        //public event EventArgs received message
-
+	public class TelegramService {
 
 		/// <summary>
 		/// The configuration file for this bot.
@@ -46,24 +44,18 @@ namespace TelegramSharp.Core {
 		/// </summary>
 		public void Start () {
 			JsonDataManager JSON = new JsonDataManager ();
-			Console.WriteLine ("Loaded TelegramAPI 0.1!");
-			Console.WriteLine ("BotWorker Started");
-
+			Console.WriteLine ("Loaded TelegramSharp V0.2!");
+			Console.WriteLine ("Listener Started");
 			UpTimeCounter = new Stopwatch ();
 			UpTimeCounter.Start ();
-
-			Console.WriteLine ("Getting bot account data");
 			try {
 				if (Cfg == null) {
-					Console.WriteLine ("Missing configuration, compile the generated config file and restart the program.");
+					Console.WriteLine ("Missing configuration, compile the generated config file and restart the program or pass a reference to a CFG class containing all the fields");
 				}
-				string getme = NetManaging.GetMe (Cfg.BotToken); 
-				if (JSON.DeserializeAndParseGetMe (getme, this) != null) {
-					while (true) {
-						string s = NetManaging.GetUpdates (Cfg.BotToken, JSON.Offset + 1, 60);
-						if (s != null) {
-							JSON.DeserializeAndParseMessages (s, this);
-						}
+				while (true) {
+					string s = NetworkSender.GetUpdates (Cfg.BotToken, JSON.Offset + 1, 60);
+					if (s != null) {
+						JSON.DeserializeAndParseMessages (s, this);
 					}
 				}
 			} catch (Exception e) {
@@ -73,11 +65,12 @@ namespace TelegramSharp.Core {
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Core.TelegramBot"/> class.
+		/// Initializes a new instance of the <see cref="Core.TelegramService"/> class.
 		/// </summary>
 		/// <param name="cfg">Cfg.</param>
-		public TelegramBot (BotSetup cfg) {
+		public TelegramService (BotSetup cfg) {
 			Cfg = cfg;
+            Thread listener = new Thread(new ThreadStart(Start));
 		}
 	}
 }
