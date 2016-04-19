@@ -6,7 +6,7 @@
     <ProjectGuid>{E5C69981-038D-4B75-B715-B2DAADFD427E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>TelegramSharp</RootNamespace>
-    <AssemblyName>TelegramAPI</AssemblyName>
+    <AssemblyName>TelegramSharp</AssemblyName>
     <ReleaseVersion>0.2</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -28,7 +28,7 @@
     <ConsolePause>false</ConsolePause>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <DocumentationFile>bin\Release\TelegramAPI.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\TelegramSharp.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
