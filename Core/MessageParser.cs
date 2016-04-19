@@ -18,26 +18,30 @@ using TelegramSharp.Modules.QChat;
 using System;
 
 namespace TelegramSharp.Core {
-	/// <summary>
-	/// Message parser.
-	/// </summary>
-	public class MessageParser {
-		/// <summary>
-		/// The parsed messages count.
-		/// </summary>
-		public int parsedMessagesCount = 0;
-		/// <summary>
-		/// The commands parsed count.
-		/// </summary>
-		public int commandsParsed = 0;
+    /// <summary>
+    /// Message parser.
+    /// </summary>
+    public class MessageParser {
+        /// <summary>
+        /// The parsed messages count.
+        /// </summary>
+        public int parsedMessagesCount = 0;
+        /// <summary>
+        /// The commands parsed count.
+        /// </summary>
+        public int commandsParsed = 0;
 
         public event EventHandler<MessageReceivedArgs> MessageReceived;
+        protected virtual void OnMessageReceived(Message message, User bot) {
+            if (true) {
+                MessageReceived(this, new MessageReceivedArgs(message, bot));
+            }
+        }
 
-        long ToUnixTime (DateTime date) {
-			var epoch = new DateTime (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-			return Convert.ToInt64 ((date.ToUniversalTime () - epoch).TotalSeconds);
-		}
-
+        long ToUnixTime(DateTime date) {
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            return Convert.ToInt64((date.ToUniversalTime() - epoch).TotalSeconds);
+        }
         /// <summary>
         /// Parses the message.
         /// </summary>
@@ -128,34 +132,28 @@ namespace TelegramSharp.Core {
             }
         }
 
-        protected virtual void OnMessageReceived(Message message, User bot) {
-            if (true) {
-                MessageReceived(this, new MessageReceivedArgs(message, bot));
-            }
+        public bool CheckForString(string trigger, string msg, TelegramBot bot) {
+            trigger = trigger.ToLower();
+            if (msg == trigger || msg + "@" + bot.BotIdentity.Username.ToLower() == trigger)
+                return true;
+            if (msg.ToLower().EndsWith(" " + trigger) || msg.ToLower().Contains(" " + trigger + "@" + bot.BotIdentity.Username.ToLower()))
+                return true;
+            if (msg.ToLower().Contains(trigger + " ") || msg.ToLower().Contains(trigger + "@" + bot.BotIdentity.Username.ToLower() + " "))
+                return true;
+            return false;
         }
 
-        bool CheckForString (string trigger, string msg, TelegramBot bot) {
-			trigger = trigger.ToLower ();
-			if (msg == trigger || msg + "@" + bot.BotIdentity.Username.ToLower () == trigger)
-				return true;
-			if (msg.ToLower ().Contains (" " + trigger) || msg.ToLower ().Contains (" " + trigger + "@" + bot.BotIdentity.Username.ToLower ()))
-				return true;
-			if (msg.ToLower ().Contains (trigger + " ") || msg.ToLower ().Contains (trigger + "@" + bot.BotIdentity.Username.ToLower () + " "))
-				return true;
-			return false;
-		}
+        bool CheckForPermission(Message msg, QChatAnswer triggeredAnswers) {
+            foreach (int id in triggeredAnswers.BannedIDs) {
+                if (msg.From.Id == id)
+                    return false;
+            }
 
-		bool CheckForPermission (Message msg, QChatAnswer triggeredAnswers) {
-			foreach (int id in triggeredAnswers.BannedIDs) {
-				if (msg.From.Id == id)
-					return false;
-			}
-
-			foreach (int id in triggeredAnswers.AllowedIDs) {
-				if (msg.From.Id == id)
-					return true;
-			}
-			return true;
-		}
-	}
+            foreach (int id in triggeredAnswers.AllowedIDs) {
+                if (msg.From.Id == id)
+                    return true;
+            }
+            return true;
+        }
+    }
 }
