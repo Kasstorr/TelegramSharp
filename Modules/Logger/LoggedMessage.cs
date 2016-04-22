@@ -27,7 +27,7 @@ namespace TelegramSharp.Modules.Logger {
 		[DataMember] int userID;
 		[DataMember] string userName;
 		[DataMember] string displayName;
-		[DataMember] int chatID;
+		[DataMember] long chatID;
 		[DataMember] string chatName;
 		[DataMember] int unixTimeSent;
 		[DataMember] string msgText;
@@ -75,7 +75,7 @@ namespace TelegramSharp.Modules.Logger {
 		/// Gets or sets the chat ID.
 		/// </summary>
 		/// <value>The chat I.</value>
-		public int ChatID {
+		public long ChatID {
 			get {
 				return chatID;
 			}

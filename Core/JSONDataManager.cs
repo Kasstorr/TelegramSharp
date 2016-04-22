@@ -34,7 +34,7 @@ namespace TelegramSharp.Core {
 		/// <param name="inJson">JSON to deserialize.</param>
 		/// <param name="bot">Bot that should parse the message.</param>
 		public void DeserializeAndParseMessages (string inJson, TelegramService bot) {
-			try {
+			//try {
 				MessageServerUpdate serverUpdate = JsonConvert.DeserializeObject<MessageServerUpdate> (inJson);
 				if (serverUpdate.Result != null) {
 					foreach (Update upd in serverUpdate.Result) {
@@ -43,10 +43,11 @@ namespace TelegramSharp.Core {
 						Logger.LogConsoleWrite (new LoggableMessage (upd.Message, bot.BotIdentity));
 					}
 				}
-			} catch (JsonReaderException) {
+			//}
+            /*catch (JsonReaderException) {
 				Console.WriteLine ("ERROR: Server not returned a valid JSON, chek your token and connection.");
 				Console.WriteLine ("Returned from the website: " + inJson);
-			}
+			}*/
 		}
 
 		/// <summary>

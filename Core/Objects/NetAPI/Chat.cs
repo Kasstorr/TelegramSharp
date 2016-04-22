@@ -13,6 +13,7 @@
 //
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+using System;
 using System.Runtime.Serialization;
 
 namespace TelegramSharp.Core.Objects.NetAPI {
@@ -25,7 +26,7 @@ namespace TelegramSharp.Core.Objects.NetAPI {
 		/// Gets or sets the identifier.
 		/// </summary>
 		/// <value>The identifier.</value>
-		[DataMember (Name = "id")] public int Id{ get; set; }
+		[DataMember (Name = "id")] public long Id{ get; set; }
 
 		/// <summary>
 		/// Gets or sets the type.

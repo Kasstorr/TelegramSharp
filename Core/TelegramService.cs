@@ -39,12 +39,12 @@ namespace TelegramSharp.Core {
 		/// </summary>
 		public User BotIdentity;
         public MessageParser Parser;
+        public JsonDataManager JSON;
 
 		/// <summary>
 		/// Start the bot. Use this method as thread, as is going to use an infinite loop.
 		/// </summary>
 		public void Start () {
-			JsonDataManager JSON = new JsonDataManager ();
 			Console.WriteLine ("Loaded TelegramSharp V0.2!");
             Parser = new MessageParser();
 			Console.WriteLine ("Listener Started");
@@ -54,6 +54,7 @@ namespace TelegramSharp.Core {
 				if (Cfg == null) {
 					Console.WriteLine ("Missing configuration, compile the generated config file and restart the program or pass a reference to a CFG class containing all the fields");
 				}
+                BotIdentity = JSON.DeserializeAndParseGetMe(NetworkSender.GetMe(Cfg.BotToken), this);
 				while (true) {
 					string s = NetworkSender.GetUpdates (Cfg.BotToken, JSON.Offset + 1, 60);
 					if (s != null) {
@@ -65,6 +66,13 @@ namespace TelegramSharp.Core {
 				System.IO.File.AppendAllText ("Error.log", "\nError generated on " + DateTime.Now.ToString () + "\n" + e.ToString ());
 			}
 		}
+
+        public void Init() {
+            JSON = new JsonDataManager();
+            Parser = new MessageParser();
+            UpTimeCounter = new Stopwatch();
+            Console.WriteLine("TelegramSharpInit Complete");
+        }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Core.TelegramService"/> class.

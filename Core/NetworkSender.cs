@@ -67,7 +67,7 @@ namespace TelegramSharp.Core {
 		/// <param name="parseMode">Parse mode.</param>
 		/// <param name="disableWebPagePreview">If set to <c>true</c> disable web page preview.</param>
 		/// <param name="replyToMessageId">Reply to message identifier.</param>
-		public static void SendMessage (string token, int chatId, string text, string parseMode = "", bool disableWebPagePreview = false, int replyToMessageId = 0) {
+		public static void SendMessage (string token, long chatId, string text, string parseMode = "", bool disableWebPagePreview = false, int replyToMessageId = 0) {
 			try {
 				// Create a request
 				WebRequest request = WebRequest.Create (CombineUri ("https://api.telegram.org/bot", token) + "/sendMessage");
@@ -129,7 +129,7 @@ namespace TelegramSharp.Core {
 		}
 
 		//chat_id text parse_mode disable_web_page_preview reply_to_message_id offset limit timeout from_chat_id message_id
-		private static string CombineParams (int chatId = 0, string text = "", string parseMode = "", bool disableWebPagePreview = false, int replyToMessageId = 0, int offset = 0, int limit = 0, int timeout = 0, int fromChatId = 0, int messageId = 0) {
+		private static string CombineParams (long chatId = 0, string text = "", string parseMode = "", bool disableWebPagePreview = false, int replyToMessageId = 0, int offset = 0, int limit = 0, int timeout = 0, int fromChatId = 0, int messageId = 0) {
 			//get update offset, limit, timeout
 			if (chatId == 0 && text == "" && parseMode == "" && disableWebPagePreview == false && replyToMessageId == 0 && fromChatId == 0 && messageId == 0) {
 				return "offset=" + offset + "&limit=" + limit + "&timeout=" + timeout;

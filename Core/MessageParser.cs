@@ -35,9 +35,10 @@ namespace TelegramSharp.Core {
             UpdateReceived?.Invoke(this, new UpdateReceivedEventArgs(message, bot));
         }
 
-        public event EventHandler<TextMessageReceivedEventArgs> TextMessageReceived;
+        public delegate void TextMessageReceived(object sender, TextMessageReceivedEventArgs e);
+        public event TextMessageReceived TextMessageReceivedEvent;
         protected virtual void OnTextMessageReceived(Message msg, User bot) {
-            TextMessageReceived?.Invoke(this, new TextMessageReceivedEventArgs(msg, bot));
+            TextMessageReceivedEvent?.Invoke(this, new TextMessageReceivedEventArgs(msg, bot));
         }
 
         long ToUnixTime(DateTime date) {
@@ -51,7 +52,7 @@ namespace TelegramSharp.Core {
         /// <param name="bot">Bot that should parse the message.</param>
         public void ParseMessage(Message msg, TelegramService bot) {
             parsedMessagesCount++;
-            if (msg.Text != null && msg.Date >= ToUnixTime(DateTime.UtcNow) - 10) {
+            if (msg.Text != null /*&& msg.Date >= ToUnixTime(DateTime.UtcNow) - 10*/) {
                 #region /me
                 if (msg.Text.ToLower() == "/me" && msg.From.Id == bot.Cfg.OwnerId ||
                     msg.Text.ToLower() == "/me@" + bot.BotIdentity.Username.ToLower() && msg.From.Id == bot.Cfg.OwnerId) {
