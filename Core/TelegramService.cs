@@ -46,9 +46,7 @@ namespace TelegramSharp.Core {
 		/// </summary>
 		public void Start () {
 			Console.WriteLine ("Loaded TelegramSharp V0.2!");
-            Parser = new MessageParser();
 			Console.WriteLine ("Listener Started");
-			UpTimeCounter = new Stopwatch ();
 			UpTimeCounter.Start ();
 			try {
 				if (Cfg == null) {
@@ -80,7 +78,7 @@ namespace TelegramSharp.Core {
 		/// <param name="cfg">Cfg.</param>
 		public TelegramService (BotSetup cfg) {
 			Cfg = cfg;
-            Thread listener = new Thread(new ThreadStart(Start));
+            //Thread listener = new Thread(new ThreadStart(Start));
 		}
 	}
 }
