@@ -30,12 +30,13 @@ namespace TelegramSharp.Core {
         /// </summary>
         public int commandsParsed = 0;
 
-        public event EventHandler<UpdateReceivedEventArgs> UpdateReceived;
+        public delegate void UpdateReceivedHandler(object sender, UpdateReceivedEventArgs args);
+        public event UpdateReceivedHandler UpdateReceived;
         protected virtual void OnUpdateReceived(Message message, User bot) {
             UpdateReceived?.Invoke(this, new UpdateReceivedEventArgs(message, bot));
         }
 
-        public delegate void TextMessageReceived(object sender, TextMessageReceivedEventArgs e);
+        public delegate void TextMessageReceived(object sender, TextMessageReceivedEventArgs args);
         public event TextMessageReceived TextMessageReceivedEvent;
         protected virtual void OnTextMessageReceived(Message msg, User bot) {
             TextMessageReceivedEvent?.Invoke(this, new TextMessageReceivedEventArgs(msg, bot));
