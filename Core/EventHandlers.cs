@@ -14,10 +14,12 @@ namespace TelegramSharp.Core {
         public string MessageText;
         public User Sender;
         public User FromBot;
+        public long ChatID;
         public TextMessageReceivedEventArgs(Message msg, User bot) {
             FromBot = bot;
             Sender = msg.From;
             MessageText = msg.Text;
+            ChatID = msg.Chat.Id;
         }
     }
 }
