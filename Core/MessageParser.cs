@@ -53,7 +53,7 @@ namespace TelegramSharp.Core {
         /// <param name="bot">Bot that should parse the message.</param>
         public void ParseMessage(Message msg, TelegramService bot) {
             parsedMessagesCount++;
-            if (msg.Text != null && msg.Date >= ToUnixTime(DateTime.UtcNow) - 10) {
+            if (msg.Text != null && msg.Date >= ToUnixTime(DateTime.UtcNow) - 120) {
                 OnUpdateReceived(msg, bot.BotIdentity);
                 OnTextMessageReceived(msg, bot.BotIdentity);
             }

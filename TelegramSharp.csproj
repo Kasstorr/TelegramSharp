@@ -71,8 +71,7 @@
     <Compile Include="Core\Objects\NetAPI\Video.cs" />
     <Compile Include="Core\Objects\NetAPI\Voice.cs" />
     <Compile Include="Core\Objects\OutgoingMessage.cs" />
-    <Compile Include="Modules\Logger\LoggedMessage.cs" />
-    <Compile Include="Modules\Logger\Logger.cs" />
+    <Compile Include="Core\Logger.cs" />
     <Compile Include="Core\TelegramService.cs" />
     <Compile Include="Core\ConfigManager.cs" />
   </ItemGroup>
