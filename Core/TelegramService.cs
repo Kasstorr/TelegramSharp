@@ -39,6 +39,7 @@ namespace TelegramSharp.Core {
 		/// </summary>
 		public User BotIdentity;
         public MessageParser Parser;
+        public NetworkSender NetService;
         public JsonDataManager JSON;
 
 		/// <summary>
@@ -68,6 +69,7 @@ namespace TelegramSharp.Core {
         public void Init() {
             JSON = new JsonDataManager();
             Parser = new MessageParser();
+            NetService = new NetworkSender();
             UpTimeCounter = new Stopwatch();
             Console.WriteLine("TelegramSharpInit Complete");
         }

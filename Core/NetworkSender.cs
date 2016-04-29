@@ -22,7 +22,7 @@ namespace TelegramSharp.Core {
 	/// <summary>
 	/// Network operations.
 	/// </summary>
-	public static class NetworkSender {
+	public class NetworkSender {
 		/// <summary>
 		/// Gets the updates containing messages.
 		/// </summary>

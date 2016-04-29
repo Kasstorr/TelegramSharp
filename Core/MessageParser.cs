@@ -53,49 +53,7 @@ namespace TelegramSharp.Core {
         /// <param name="bot">Bot that should parse the message.</param>
         public void ParseMessage(Message msg, TelegramService bot) {
             parsedMessagesCount++;
-            if (msg.Text != null /*&& msg.Date >= ToUnixTime(DateTime.UtcNow) - 10*/) {
-                #region /me
-                if (msg.Text.ToLower() == "/me" && msg.From.Id == bot.Cfg.OwnerId ||
-                    msg.Text.ToLower() == "/me@" + bot.BotIdentity.Username.ToLower() && msg.From.Id == bot.Cfg.OwnerId) {
-                    commandsParsed++;
-
-                    NetworkSender.SendMessage(bot.Cfg.BotToken, msg.Chat.Id,
-                        "<i>Oh master, you need your personal data??\nOk, sure</i>\n<b>You are:</b> <i>" +
-                        msg.From.FirstName + " " + msg.From.LastName + "</i>\n<b>Your username is:</b> <i>" +
-                        msg.From.Username + "</i>\n<b>Your unique ID is:</b> <i>" +
-                        msg.From.Id + "</i>\n<b>And you are chatting in:</b> <i>" +
-                        msg.Chat.Title + "</i>\n<b>ID:</b> <i>" + msg.Chat.Id +
-                        "\n**blinks** it's all ok master? **blinks**</i>", "HTML");
-
-                    return;
-                }
-
-                if (msg.Text.ToLower() == "/me" || msg.Text.ToLower() == "/me@" + bot.BotIdentity.Username.ToLower()) {
-                    commandsParsed++;
-
-                    NetworkSender.SendMessage(bot.Cfg.BotToken, msg.Chat.Id,
-                        "<i>Uh, ok, you want to know what i know about you?\nOk, let's start!</i>\n<b>You are:</b> <i>" +
-                        msg.From.FirstName + " " + msg.From.LastName + "</i>\n<b>Your username is:</b> <i>" +
-                        msg.From.Username + "</i>\n<b>Your unique ID is:</b> <i>" +
-                        msg.From.Id + "</i>\n<b>And you are chatting in:</b> <i>" +
-                        msg.Chat.Title + "</i>\n<b>ID:</b> <i>" + msg.Chat.Id +
-                        "\nOk?</i>", "HTML");
-
-                    return;
-                }
-                #endregion
-                #region BotStats
-                if (msg.Text.ToLower() == "/botstats" || msg.Text.ToLower() == "/botstats@" + bot.BotIdentity.Username.ToLower()) {
-                    TimeSpan uptime = new TimeSpan(0, 0, 0, 0, (int)bot.UpTimeCounter.ElapsedMilliseconds);
-                    commandsParsed++;
-
-                    NetworkSender.SendMessage(bot.Cfg.BotToken, msg.Chat.Id, "*UPTIME:* " +
-                    uptime.Days + "D " + uptime.Hours + "H " + uptime.Minutes + "M " +
-                    uptime.Seconds + "S\n*Parsed Messages:* " + parsedMessagesCount +
-                    "\n*Parsed user commands:* " + commandsParsed + "\n_Running on TelegramSharp V=.2","markdown");
-                    return;
-                }
-                #endregion
+            if (msg.Text != null && msg.Date >= ToUnixTime(DateTime.UtcNow) - 10) {
                 OnUpdateReceived(msg, bot.BotIdentity);
                 OnTextMessageReceived(msg, bot.BotIdentity);
             }
