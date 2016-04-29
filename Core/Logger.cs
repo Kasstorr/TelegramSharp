@@ -15,28 +15,21 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using TelegramSharp.Core.Objects.NetAPI;
-using Newtonsoft.Json;
-using TelegramSharp.Modules.Logger;
 
-namespace TelegramSharp.Modules.Logger {
+namespace TelegramSharp{
 	/// <summary>
 	/// Message Logger.
 	/// </summary>
 	public static class Logger {
-		
-		static void LogDBAdd (Message msgToLog) {
-			LoggedMessage log = new LoggedMessage (msgToLog);
-			System.IO.File.AppendAllText ("DatabaseLog.db", JsonConvert.SerializeObject (log));
-		}
 
 		/// <summary>
 		/// Logs a message to the console.
 		/// </summary>
 		/// <param name="msgToLog">Message to log.</param>
-		public static void LogConsoleWrite (LoggableMessage msgToLog) {
+		public static void LogConsoleWrite (Message msgToLog, User Bot) {
 			Console.WriteLine ("");
 			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine ("***Received Message from bot:" + msgToLog.FromBot.FirstName + " " + msgToLog.FromBot.LastName + "***");
+			Console.WriteLine ("***Received Message from bot:" + Bot.FirstName + " " + Bot.LastName + "***");
 			Console.Write ("Chat:");
 			Console.ForegroundColor = ConsoleColor.DarkRed;
 			Console.WriteLine (msgToLog.Chat.Title + " " + msgToLog.Chat.Username);
@@ -49,7 +42,6 @@ namespace TelegramSharp.Modules.Logger {
 				Console.Write ("Message:");
 				Console.ForegroundColor = ConsoleColor.White;
 				Console.WriteLine (msgToLog.Text);
-				LogDBAdd (msgToLog);
 			}
 			if (msgToLog.LeftChatParticipant != null) {
 				Console.WriteLine (msgToLog.LeftChatParticipant.FirstName + "" + msgToLog.LeftChatParticipant.LastName + "(" + msgToLog.LeftChatParticipant.Username + ") Leaved the group");

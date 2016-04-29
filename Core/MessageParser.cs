@@ -15,6 +15,7 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using TelegramSharp.Core.Objects.NetAPI;
 using System;
+using System.Text.RegularExpressions;
 
 namespace TelegramSharp.Core {
     /// <summary>
@@ -30,13 +31,13 @@ namespace TelegramSharp.Core {
         /// </summary>
         public int commandsParsed = 0;
 
-        public delegate void UpdateReceivedHandler(object sender, UpdateReceivedEventArgs args);
+        public delegate void UpdateReceivedHandler(object sender, UpdateReceivedEventArgs e);
         public event UpdateReceivedHandler UpdateReceived;
         protected virtual void OnUpdateReceived(Message message, User bot) {
             UpdateReceived?.Invoke(this, new UpdateReceivedEventArgs(message, bot));
         }
 
-        public delegate void TextMessageReceived(object sender, TextMessageReceivedEventArgs args);
+        public delegate void TextMessageReceived(object sender, TextMessageReceivedEventArgs e);
         public event TextMessageReceived TextMessageReceivedEvent;
         protected virtual void OnTextMessageReceived(Message msg, User bot) {
             TextMessageReceivedEvent?.Invoke(this, new TextMessageReceivedEventArgs(msg, bot));
@@ -53,49 +54,7 @@ namespace TelegramSharp.Core {
         /// <param name="bot">Bot that should parse the message.</param>
         public void ParseMessage(Message msg, TelegramService bot) {
             parsedMessagesCount++;
-            if (msg.Text != null /*&& msg.Date >= ToUnixTime(DateTime.UtcNow) - 10*/) {
-                #region /me
-                if (msg.Text.ToLower() == "/me" && msg.From.Id == bot.Cfg.OwnerId ||
-                    msg.Text.ToLower() == "/me@" + bot.BotIdentity.Username.ToLower() && msg.From.Id == bot.Cfg.OwnerId) {
-                    commandsParsed++;
-
-                    NetworkSender.SendMessage(bot.Cfg.BotToken, msg.Chat.Id,
-                        "<i>Oh master, you need your personal data??\nOk, sure</i>\n<b>You are:</b> <i>" +
-                        msg.From.FirstName + " " + msg.From.LastName + "</i>\n<b>Your username is:</b> <i>" +
-                        msg.From.Username + "</i>\n<b>Your unique ID is:</b> <i>" +
-                        msg.From.Id + "</i>\n<b>And you are chatting in:</b> <i>" +
-                        msg.Chat.Title + "</i>\n<b>ID:</b> <i>" + msg.Chat.Id +
-                        "\n**blinks** it's all ok master? **blinks**</i>", "HTML");
-
-                    return;
-                }
-
-                if (msg.Text.ToLower() == "/me" || msg.Text.ToLower() == "/me@" + bot.BotIdentity.Username.ToLower()) {
-                    commandsParsed++;
-
-                    NetworkSender.SendMessage(bot.Cfg.BotToken, msg.Chat.Id,
-                        "<i>Uh, ok, you want to know what i know about you?\nOk, let's start!</i>\n<b>You are:</b> <i>" +
-                        msg.From.FirstName + " " + msg.From.LastName + "</i>\n<b>Your username is:</b> <i>" +
-                        msg.From.Username + "</i>\n<b>Your unique ID is:</b> <i>" +
-                        msg.From.Id + "</i>\n<b>And you are chatting in:</b> <i>" +
-                        msg.Chat.Title + "</i>\n<b>ID:</b> <i>" + msg.Chat.Id +
-                        "\nOk?</i>", "HTML");
-
-                    return;
-                }
-                #endregion
-                #region BotStats
-                if (msg.Text.ToLower() == "/botstats" || msg.Text.ToLower() == "/botstats@" + bot.BotIdentity.Username.ToLower()) {
-                    TimeSpan uptime = new TimeSpan(0, 0, 0, 0, (int)bot.UpTimeCounter.ElapsedMilliseconds);
-                    commandsParsed++;
-
-                    NetworkSender.SendMessage(bot.Cfg.BotToken, msg.Chat.Id, "*UPTIME:* " +
-                    uptime.Days + "D " + uptime.Hours + "H " + uptime.Minutes + "M " +
-                    uptime.Seconds + "S\n*Parsed Messages:* " + parsedMessagesCount +
-                    "\n*Parsed user commands:* " + commandsParsed + "\n_Running on TelegramSharp V=.2","markdown");
-                    return;
-                }
-                #endregion
+            if (msg.Text != null && msg.Date >= ToUnixTime(DateTime.UtcNow) - 120) {
                 OnUpdateReceived(msg, bot.BotIdentity);
                 OnTextMessageReceived(msg, bot.BotIdentity);
             }
@@ -110,11 +69,12 @@ namespace TelegramSharp.Core {
         /// <returns></returns>
         public bool CheckForString(string trigger, string msg, TelegramService bot) {
             trigger = trigger.ToLower();
-            if (msg == trigger || msg + "@" + bot.BotIdentity.Username.ToLower() == trigger)
+            Regex alone = new Regex(String.Format("^{0}$", trigger), RegexOptions.IgnoreCase);
+            Regex alonePlusUser = new Regex(String.Format("^({0})({1})", trigger, "@" + bot.BotIdentity.Username), RegexOptions.IgnoreCase);
+            Regex singleWord = new Regex(String.Format("({0})\b", trigger), RegexOptions.IgnoreCase);
+            if (alone.IsMatch(msg) || alonePlusUser.IsMatch(msg))
                 return true;
-            if (msg.ToLower().EndsWith(" " + trigger) || msg.ToLower().Contains(" " + trigger + "@" + bot.BotIdentity.Username.ToLower()))
-                return true;
-            if (msg.ToLower().Contains(trigger + " ") || msg.ToLower().Contains(trigger + "@" + bot.BotIdentity.Username.ToLower() + " "))
+            if (singleWord.IsMatch(msg))
                 return true;
             return false;
         }

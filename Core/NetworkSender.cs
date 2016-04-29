@@ -22,7 +22,7 @@ namespace TelegramSharp.Core {
 	/// <summary>
 	/// Network operations.
 	/// </summary>
-	public static class NetworkSender {
+	public class NetworkSender {
 		/// <summary>
 		/// Gets the updates containing messages.
 		/// </summary>
@@ -91,12 +91,12 @@ namespace TelegramSharp.Core {
 			}
 		}
 
-		/// <summary>
-		/// Gets Bot user information.
-		/// </summary>
-		/// <returns>The <c>User</c> containing the bot acocunt infos.</returns>
-		/// <param name="token">Bot token.</param>
-		public static string GetMe (string token) {
+        /// <summary>
+        /// Gets Bot user information.
+        /// </summary>
+        /// <returns>The <c>User</c> containing the bot acocunt infos.</returns>
+        /// <param name="token">Bot token.</param>
+        public static string GetMe (string token) {
 			try {
 				// Create a request
 				WebRequest request = WebRequest.Create (CombineUri ("https://api.telegram.org/bot", token) + "/getMe");

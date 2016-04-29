@@ -15,7 +15,6 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using TelegramSharp.Core.Objects.NetAPI;
-using TelegramSharp.Modules.Logger;
 using Newtonsoft.Json;
 
 namespace TelegramSharp.Core {
@@ -40,7 +39,7 @@ namespace TelegramSharp.Core {
 					foreach (Update upd in serverUpdate.Result) {
 						Offset = upd.UpdateId;
                         bot.Parser.ParseMessage(upd.Message, bot);
-						Logger.LogConsoleWrite (new LoggableMessage (upd.Message, bot.BotIdentity));
+						Logger.LogConsoleWrite (upd.Message, bot.BotIdentity);
 					}
 				}
 			//}
