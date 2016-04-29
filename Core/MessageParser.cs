@@ -15,6 +15,7 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using TelegramSharp.Core.Objects.NetAPI;
 using System;
+using System.Text.RegularExpressions;
 
 namespace TelegramSharp.Core {
     /// <summary>
@@ -68,11 +69,11 @@ namespace TelegramSharp.Core {
         /// <returns></returns>
         public bool CheckForString(string trigger, string msg, TelegramService bot) {
             trigger = trigger.ToLower();
-            if (msg == trigger || msg + "@" + bot.BotIdentity.Username.ToLower() == trigger)
+            Regex alone = new Regex(String.Format("^{0}$", trigger), RegexOptions.IgnoreCase);
+            Regex singleWord = new Regex(String.Format("({0})\b", trigger), RegexOptions.IgnoreCase);
+            if (alone.IsMatch(msg))
                 return true;
-            if (msg.ToLower().EndsWith(" " + trigger) || msg.ToLower().Contains(" " + trigger + "@" + bot.BotIdentity.Username.ToLower()))
-                return true;
-            if (msg.ToLower().Contains(trigger + " ") || msg.ToLower().Contains(trigger + "@" + bot.BotIdentity.Username.ToLower() + " "))
+            if (singleWord.IsMatch(msg))
                 return true;
             return false;
         }
