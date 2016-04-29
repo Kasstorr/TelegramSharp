@@ -70,8 +70,9 @@ namespace TelegramSharp.Core {
         public bool CheckForString(string trigger, string msg, TelegramService bot) {
             trigger = trigger.ToLower();
             Regex alone = new Regex(String.Format("^{0}$", trigger), RegexOptions.IgnoreCase);
+            Regex alonePlusUser = new Regex(String.Format("^({0})({1})", trigger, "@" + bot.BotIdentity.Username), RegexOptions.IgnoreCase);
             Regex singleWord = new Regex(String.Format("({0})\b", trigger), RegexOptions.IgnoreCase);
-            if (alone.IsMatch(msg))
+            if (alone.IsMatch(msg) || alonePlusUser.IsMatch(msg))
                 return true;
             if (singleWord.IsMatch(msg))
                 return true;
