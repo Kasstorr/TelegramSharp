@@ -45,7 +45,6 @@ namespace TelegramSharp.Core {
 			}
 			config = new BotSetup ();
 			config.BotToken = "your token here";
-			config.OwnerId = 0;
 			SaveConfig (config);
 			return null;
 		}
