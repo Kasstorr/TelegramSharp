@@ -1,50 +1,96 @@
-//TelegramSharp - A library to make telegram bots
-//Copyright (C) 2016  Samuele Lorefice
-//
-//This program is free software: you can redistribute it and/or modify
-//it under the terms of the GNU General Public License as published by
-//the Free Software Foundation, either version 3 of the License, or
-//(at your option) any later version.
-//
-//This program is distributed in the hope that it will be useful,
-//but WITHOUT ANY WARRANTY; without even the implied warranty of
-//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//GNU General Public License for more details.
-//
-//    You should have received a copy of the GNU General Public License
-//    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using TelegramSharp.Core.Objects.NetAPI;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System.Threading.Tasks;
 
-namespace TelegramSharp{
-	/// <summary>
-	/// Message Logger.
-	/// </summary>
-	public static class Logger {
+namespace TelegramSharp.Core
+{
+    class Logger
+    {
+        public static string LogLevel = "FATAL";
+        public static string LogPath = "Path";
 
-		/// <summary>
-		/// Logs a message to the console.
-		/// </summary>
-		/// <param name="msgToLog">Message to log.</param>
-		public static void LogConsoleWrite (Message msgToLog, User Bot) {
-			Console.WriteLine (String.Format("{0},{4}|INFO|{1}|From chat {2}, by {5} Message: {3}", DateTime.Now.ToString(), Bot.Username, (msgToLog.Chat.Title + " " + msgToLog.Chat.Username), msgToLog.Text, DateTime.Now.Millisecond, msgToLog.From.Id+" "+msgToLog.From.FirstName+" "+msgToLog.From.LastName));
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Msg"></param>
+        /// <param name="e"></param>
+        public static void Fatal(string Msg, Exception e = null)
+        {
+            string msg = String.Format("{0},{1:ffff}|INFO|{2}; {3}; {4}; {5}; {6}; {7}", DateTime.Now.ToString(), DateTime.Now.Millisecond, Msg, e.HResult.ToString(), e.Message.ToString(), e.Source.ToString(), e.TargetSite.ToString(), e.StackTrace.ToString());
+            LogToFile(msg);
+        }
 
-		/// <summary>
-		/// Logs the bot identity.
-		/// </summary>
-		/// <param name="getMe">Get me.</param>
-		public static void LogWrite (User getMe) {
-			Console.WriteLine ("");
-			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine ("***Received Bot Identity***");
-			Console.ForegroundColor = ConsoleColor.Yellow;
-			Console.WriteLine ("Name: " + getMe.FirstName + " " + getMe.LastName);
-			Console.WriteLine ("Username: @" + getMe.Username + " ID: " + getMe.Id);
-			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine ("***End of Bot Identity***");
-			Console.WriteLine ("");
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Msg"></param>
+        /// <param name="e"></param>
+        public static void Error(string Msg, Exception e = null)
+        {
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Msg"></param>
+        /// <param name="e"></param>
+        public static void Warn(string Msg, Exception e = null)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Msg"></param>
+        /// <param name="e"></param>
+        public static void Info(string Msg, Exception e = null)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Msg"></param>
+        /// <param name="e"></param>
+        public static void Debug(string Msg, Exception e = null)
+        {
+
+        }
+        /// <summary>
+        /// Logs a message into a file given the global path and level.
+        /// </summary>
+        /// <param name="Msg">Message Log to store.</param>
+        public static void LogToFile(string Msg)
+        {
+            if (LogLevel == "")
+            {
+                if (File.Exists(LogPath))
+                {
+                    try
+                    {
+                        File.AppendAllText(LogPath, Msg);
+                    }
+                    catch (Exception e)
+                    {
+                        Error("", e);
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        File.WriteAllText(LogPath, Msg);
+                    }
+                    catch (Exception e)
+                    {
+                        Error("", e);
+                    }
+                }
+            }
+        }
+    }
 }
-
