@@ -26,27 +26,26 @@ namespace TelegramSharp.Core {
 		/// The offset of last requested update
 		/// </summary>
 		public int Offset;
-
+        static Logger Logging;
 		/// <summary>
 		/// Deserializes the and parse messages.
 		/// </summary>
 		/// <param name="inJson">JSON to deserialize.</param>
 		/// <param name="bot">Bot that should parse the message.</param>
-		public void DeserializeAndParseMessages (string inJson, TelegramService bot) {
-			//try {
-				MessageServerUpdate serverUpdate = JsonConvert.DeserializeObject<MessageServerUpdate> (inJson);
-				if (serverUpdate.Result != null) {
-					foreach (Update upd in serverUpdate.Result) {
-						Offset = upd.UpdateId;
-                        bot.Parser.ParseMessage(upd.Message, bot);
-						ConsoleLogger.LogMsgToConsole (upd.Message, bot.BotIdentity);
-					}
-				}
-			//}
-            /*catch (JsonReaderException) {
-				Console.WriteLine ("ERROR: Server not returned a valid JSON, chek your token and connection.");
-				Console.WriteLine ("Returned from the website: " + inJson);
-			}*/
+		public void DeserializeAndParseMessages (string inJson, TelegramService bot)
+        {
+		    MessageServerUpdate serverUpdate = JsonConvert.DeserializeObject<MessageServerUpdate> (inJson);
+			if (serverUpdate.Result != null)
+            {
+				foreach (Update upd in serverUpdate.Result)
+                {
+					Offset = upd.UpdateId;
+                    bot.Parser.ParseMessage(upd.Message, bot);
+                    Message msgToLog = upd.Message;
+                    User Bot = bot.BotIdentity;
+                    Logging.Info(String.Format("{0}:From chat {1}, by {3} Message: {2}", Bot.Username, msgToLog.Chat.Title + " " + msgToLog.Chat.Username, msgToLog.Text, msgToLog.From.Id + " " + msgToLog.From.FirstName + " " + msgToLog.From.LastName));
+                }
+			}
 		}
 
 		/// <summary>
@@ -63,7 +62,7 @@ namespace TelegramSharp.Core {
 				bot.BotIdentity = serverUpdate.GetMe;
 				return serverUpdate.GetMe;
 			} catch (JsonReaderException e) {
-				Logger.Error ("ERROR: Server not returned a valid JSON, chek your token and connection. From the website: " + inJson, e);
+				Logging.Error ("ERROR: Server not returned a valid JSON, chek your token and connection. From the website: " + inJson, e);
 			}
 			return null;
 		}

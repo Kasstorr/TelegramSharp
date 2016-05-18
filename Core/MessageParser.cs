@@ -22,10 +22,12 @@ namespace TelegramSharp.Core {
     /// Message parser.
     /// </summary>
     public class MessageParser {
+        
         /// <summary>
         /// The parsed messages count.
         /// </summary>
         public int parsedMessagesCount = 0;
+        
         /// <summary>
         /// The commands parsed count.
         /// </summary>
@@ -47,6 +49,7 @@ namespace TelegramSharp.Core {
             var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             return Convert.ToInt64((date.ToUniversalTime() - epoch).TotalSeconds);
         }
+        
         /// <summary>
         /// Parses the message.
         /// </summary>

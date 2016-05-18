@@ -46,27 +46,27 @@ namespace TelegramSharp.Core
         /// Start the bot. Use this method as thread, as is going to use an infinite loop.
         /// </summary>
         public void Start() {
-            try {
-                if (Cfg == null) {
-                    Logging.Error("Missing configuration, compile the generated config file and restart the program or pass a reference to a CFG class containing all the fields.");
-                }
-                else
+            if (Cfg == null) {
+                Logging.Error("Missing configuration, compile the generated config file and restart the program or pass a reference to a CFG class containing all the fields.");
+            }
+            else
+            {
+                BotIdentity = JSON.DeserializeAndParseGetMe(NetworkSender.GetMe(Cfg.BotToken), this);
+                Console.WriteLine("Loaded TelegramSharp " + Cfg.LibVersion.ToString() + "!");
+                bool isStarted = false;
+                UpTimeCounter.Start();
+                while (true)
                 {
-                    BotIdentity = JSON.DeserializeAndParseGetMe(NetworkSender.GetMe(Cfg.BotToken), this);
-                    Console.WriteLine("Loaded TelegramSharp " + Cfg.LibVersion.ToString() + "!");
-                    Console.WriteLine("Listener Started");
-                    UpTimeCounter.Start();
-                    while (true)
+                    if (!isStarted)
                     {
-                        string s = NetworkSender.GetUpdates(Cfg.BotToken, JSON.Offset + 1, 60);
-                        if (s != null)
-                        {
-                            JSON.DeserializeAndParseMessages(s, this);
-                        }
+                        Console.WriteLine("Listener Started");
+                    }
+                    string s = NetworkSender.GetUpdates(Cfg.BotToken, JSON.Offset + 1, 60);
+                    if (s != null)
+                    {
+                        JSON.DeserializeAndParseMessages(s, this);
                     }
                 }
-            } catch (Exception e) {
-                Logging.Error("Missing configuration, compile the generated config file and restart the program or pass a reference to a CFG class containing all the fields.", e);
             }
         }
 

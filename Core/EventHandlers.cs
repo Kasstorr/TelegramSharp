@@ -2,6 +2,10 @@
 using TelegramSharp.Core.Objects.NetAPI;
 
 namespace TelegramSharp.Core {
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class UpdateReceivedEventArgs : EventArgs {
         public Message Message;
         public User FromBot;
@@ -12,6 +16,10 @@ namespace TelegramSharp.Core {
             ChatID = msg.Chat.Id;
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class TextMessageReceivedEventArgs : EventArgs {
         public string MessageText;
         public User Sender;

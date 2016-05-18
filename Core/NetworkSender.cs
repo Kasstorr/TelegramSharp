@@ -19,11 +19,14 @@ using System.Net;
 using System.Text;
 
 namespace TelegramSharp.Core {
-	/// <summary>
+	
+    /// <summary>
 	/// Network operations.
 	/// </summary>
 	public class NetworkSender {
-		/// <summary>
+
+        static Logger Logging;
+        /// <summary>
 		/// Gets the updates containing messages.
 		/// </summary>
 		/// <returns>The updates.</returns>
@@ -52,8 +55,7 @@ namespace TelegramSharp.Core {
 				response.Close ();
 				return _out; // Return the value
 			} catch (WebException e) {
-				Console.WriteLine ("WebException generated, see Error.log");
-				File.AppendAllText ("Error.log", "\nError generated on " + DateTime.Now.ToString () + "\n" + e.ToString ());
+                Logging.Error("", e);
 			}
 			return null;
 		}
@@ -86,9 +88,8 @@ namespace TelegramSharp.Core {
 				reader.Close (); // Clean up the streams.
 				response.Close ();
 			} catch (WebException e) {
-				Console.WriteLine ("WebException generated, see Error.log");
-				File.AppendAllText ("Error.log", "\nError generated on " + DateTime.Now.ToString () + "\n" + e.ToString ());
-			}
+                Logging.Error("", e);
+            }
 		}
 
         /// <summary>
@@ -117,9 +118,8 @@ namespace TelegramSharp.Core {
 				response.Close ();
 				return _out; // Return the value
 			} catch (WebException e) {
-				Console.WriteLine ("WebException generated, see Error.log");
-				File.AppendAllText ("Error.log", "\nError generated on " + DateTime.Now.ToString () + "\n" + e.ToString ());
-			}
+                Logging.Error("", e);
+            }
 			return null;
 		}
 

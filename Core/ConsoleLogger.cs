@@ -14,25 +14,16 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using TelegramSharp;
 using TelegramSharp.Core.Objects.NetAPI;
 
-namespace TelegramSharp
+namespace TelegramSharp.Core
 {
     /// <summary>
     /// Message Logger.
     /// </summary>
     public static class ConsoleLogger
     {
-
-        /// <summary>
-        /// Logs a message to the console.
-        /// </summary>
-        /// <param name="msgToLog">Message to log.</param>
-        public static void LogMsgToConsole(Message msgToLog, User Bot)
-        {
-            Console.WriteLine(String.Format("{0},{4:ffff}|INFO|{1}|From chat {2}, by {5} Message: {3}", DateTime.Now.ToString(), Bot.Username, (msgToLog.Chat.Title + " " + msgToLog.Chat.Username), msgToLog.Text, DateTime.Now.Millisecond, msgToLog.From.Id + " " + msgToLog.From.FirstName + " " + msgToLog.From.LastName));
-        }
-
         /// <summary>
         /// Logs the bot identity.
         /// </summary>
