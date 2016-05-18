@@ -15,12 +15,11 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Diagnostics;
-using System.Threading;
-using TelegramSharp.Core;
 using TelegramSharp.Core.Objects;
 using TelegramSharp.Core.Objects.NetAPI;
 
-namespace TelegramSharp.Core {
+namespace TelegramSharp.Core
+{
     /// <summary>
     /// Telegram bot.
     /// </summary>
@@ -41,28 +40,33 @@ namespace TelegramSharp.Core {
         public MessageParser Parser;
         public NetworkSender NetService;
         public JsonDataManager JSON;
+        Logger Logging;
 
         /// <summary>
         /// Start the bot. Use this method as thread, as is going to use an infinite loop.
         /// </summary>
         public void Start() {
-            Console.WriteLine("Loaded TelegramSharp V0.2!");
-            Console.WriteLine("Listener Started");
-            UpTimeCounter.Start();
             try {
                 if (Cfg == null) {
-                    Console.WriteLine("Missing configuration, compile the generated config file and restart the program or pass a reference to a CFG class containing all the fields");
+                    Logging.Error("Missing configuration, compile the generated config file and restart the program or pass a reference to a CFG class containing all the fields.");
                 }
-                BotIdentity = JSON.DeserializeAndParseGetMe(NetworkSender.GetMe(Cfg.BotToken), this);
-                while (true) {
-                    string s = NetworkSender.GetUpdates(Cfg.BotToken, JSON.Offset + 1, 60);
-                    if (s != null) {
-                        JSON.DeserializeAndParseMessages(s, this);
+                else
+                {
+                    BotIdentity = JSON.DeserializeAndParseGetMe(NetworkSender.GetMe(Cfg.BotToken), this);
+                    Console.WriteLine("Loaded TelegramSharp " + Cfg.LibVersion.ToString() + "!");
+                    Console.WriteLine("Listener Started");
+                    UpTimeCounter.Start();
+                    while (true)
+                    {
+                        string s = NetworkSender.GetUpdates(Cfg.BotToken, JSON.Offset + 1, 60);
+                        if (s != null)
+                        {
+                            JSON.DeserializeAndParseMessages(s, this);
+                        }
                     }
                 }
             } catch (Exception e) {
-
-                Logger.Error("Missing configuration, compile the generated config file and restart the program or pass a reference to a CFG class containing all the fields", e);
+                Logging.Error("Missing configuration, compile the generated config file and restart the program or pass a reference to a CFG class containing all the fields.", e);
             }
         }
 

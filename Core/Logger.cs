@@ -15,23 +15,39 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.IO;
+using TelegramSharp.Core.Objects;
 
 namespace TelegramSharp.Core
 {
     class Logger
     {
-        public static string LogLevel = "FATAL";
-        public static string LogPath = "Path";
+        public BotSetup Cfg;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="Msg"></param>
         /// <param name="e"></param>
-        public static void Fatal(string Msg, Exception e = null)
+        public void Fatal(string msg, Exception e = null)
         {
-            string msg = String.Format("{0},{1:ffff}|INFO|{2}; {3}; {4}; {5}; {6}; {7}", DateTime.Now.ToString(), DateTime.Now.Millisecond, Msg, e.HResult.ToString(), e.Message.ToString(), e.Source.ToString(), e.TargetSite.ToString(), e.StackTrace.ToString());
-            LogToFile(msg);
+            if (e == null)
+            {
+                string log = String.Format("{0},{1:ffff}|FATAL|{2}", DateTime.Now.ToString(), DateTime.Now.Millisecond, msg);
+                if (Cfg.VerboseMode)
+                {
+                    Console.WriteLine(log);
+                }
+                LogToFile(log, "FATAL");
+            }
+            else
+            {
+                string log = String.Format("{0},{1:ffff}|FATAL|{2}; {3}; {4}; {5}; {6}; {7}", DateTime.Now.ToString(), DateTime.Now.Millisecond, msg, e.HResult.ToString(), e.Message.ToString(), e.Source.ToString(), e.TargetSite.ToString(), e.StackTrace.ToString());
+                if (Cfg.VerboseMode)
+                {
+                    Console.WriteLine(log);
+                }
+                LogToFile(log, "FATAL");
+            }
         }
 
         /// <summary>
@@ -39,20 +55,52 @@ namespace TelegramSharp.Core
         /// </summary>
         /// <param name="Msg"></param>
         /// <param name="e"></param>
-        public static void Error(string Msg, Exception e = null)
+        public void Error(string msg, Exception e = null)
         {
-            string msg = String.Format("{0},{1:ffff}|INFO|{2}; {3}; {4}; {5}; {6}; {7}", DateTime.Now.ToString(), DateTime.Now.Millisecond, Msg, e.HResult.ToString(), e.Message.ToString(), e.Source.ToString(), e.TargetSite.ToString(), e.StackTrace.ToString());
-            LogToFile(msg);
+            if (e == null)
+            {
+                string log = String.Format("{0},{1:ffff}|ERROR|{2}", DateTime.Now.ToString(), DateTime.Now.Millisecond, msg);
+                if (Cfg.VerboseMode)
+                {
+                    Console.WriteLine(log);
+                }
+                LogToFile(log, "ERROR");
+            }
+            else
+            {
+                string log = String.Format("{0},{1:ffff}|ERROR|{2}; {3}; {4}; {5}; {6}; {7}", DateTime.Now.ToString(), DateTime.Now.Millisecond, msg, e.HResult.ToString(), e.Message.ToString(), e.Source.ToString(), e.TargetSite.ToString(), e.StackTrace.ToString());
+                if (Cfg.VerboseMode)
+                {
+                    Console.WriteLine(log);
+                }
+                LogToFile(log, "ERROR");
+            }
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="Msg"></param>
         /// <param name="e"></param>
-        public static void Warn(string Msg, Exception e = null)
+        public void Warn(string msg, Exception e = null)
         {
-            string msg = String.Format("{0},{1:ffff}|INFO|{2}; {3}; {4}; {5}; {6}; {7}", DateTime.Now.ToString(), DateTime.Now.Millisecond, Msg, e.HResult.ToString(), e.Message.ToString(), e.Source.ToString(), e.TargetSite.ToString(), e.StackTrace.ToString());
-            LogToFile(msg);
+            if (e == null)
+            {
+                string log = String.Format("{0},{1:ffff}|WAEN|{2}", DateTime.Now.ToString(), DateTime.Now.Millisecond, msg);
+                if (Cfg.VerboseMode)
+                {
+                    Console.WriteLine(log);
+                }
+                LogToFile(log, "WARN");
+            }
+            else
+            {
+                string log = String.Format("{0},{1:ffff}|WARN|{2}; {3}; {4}; {5}; {6}; {7}", DateTime.Now.ToString(), DateTime.Now.Millisecond, msg, e.HResult.ToString(), e.Message.ToString(), e.Source.ToString(), e.TargetSite.ToString(), e.StackTrace.ToString());
+                if (Cfg.VerboseMode)
+                {
+                    Console.WriteLine(log);
+                }
+                LogToFile(log, "WARN");
+            }
         }
 
         /// <summary>
@@ -60,10 +108,26 @@ namespace TelegramSharp.Core
         /// </summary>
         /// <param name="Msg"></param>
         /// <param name="e"></param>
-        public static void Info(string Msg, Exception e = null)
+        public void Info(string msg, Exception e = null)
         {
-            string msg = String.Format("{0},{1:ffff}|INFO|{2}; {3}; {4}; {5}; {6}; {7}", DateTime.Now.ToString(), DateTime.Now.Millisecond, Msg, e.HResult.ToString(), e.Message.ToString(), e.Source.ToString(), e.TargetSite.ToString(), e.StackTrace.ToString());
-            LogToFile(msg);
+            if (e == null)
+            {
+                string log = String.Format("{0},{1:ffff}|INFO|{2}", DateTime.Now.ToString(), DateTime.Now.Millisecond, msg);
+                if (Cfg.VerboseMode)
+                {
+                    Console.WriteLine(log);
+                }
+                LogToFile(log, "INFO");
+            }
+            else
+            {
+                string log = String.Format("{0},{1:ffff}|INFO|{2}; {3}; {4}; {5}; {6}; {7}", DateTime.Now.ToString(), DateTime.Now.Millisecond, msg, e.HResult.ToString(), e.Message.ToString(), e.Source.ToString(), e.TargetSite.ToString(), e.StackTrace.ToString());
+                if (Cfg.VerboseMode)
+                {
+                    Console.WriteLine(log);
+                }
+                LogToFile(log, "INFO");
+            }
         }
 
         /// <summary>
@@ -71,24 +135,40 @@ namespace TelegramSharp.Core
         /// </summary>
         /// <param name="Msg"></param>
         /// <param name="e"></param>
-        public static void Debug(string Msg, Exception e = null)
+        public void Debug(string msg, Exception e = null)
         {
-            string msg = String.Format("{0},{1:ffff}|INFO|{2}; {3}; {4}; {5}; {6}; {7}", DateTime.Now.ToString(), DateTime.Now.Millisecond, Msg, e.HResult.ToString(), e.Message.ToString(), e.Source.ToString(), e.TargetSite.ToString(), e.StackTrace.ToString());
-            LogToFile(msg);
+            if (e == null)
+            {
+                string log = String.Format("{0},{1:ffff}|DEBUG|{2}", DateTime.Now.ToString(), DateTime.Now.Millisecond, msg);
+                if (Cfg.VerboseMode)
+                {
+                    Console.WriteLine(log);
+                }
+                LogToFile(log, "DEBUG");
+            }
+            else
+            {
+                string log = String.Format("{0},{1:ffff}|DEBUG|{2}; {3}; {4}; {5}; {6}; {7}", DateTime.Now.ToString(), DateTime.Now.Millisecond, msg, e.HResult.ToString(), e.Message.ToString(), e.Source.ToString(), e.TargetSite.ToString(), e.StackTrace.ToString());
+                if (Cfg.VerboseMode)
+                {
+                    Console.WriteLine(log);
+                }
+                LogToFile(log, "DEBUG");
+            }
         }
         /// <summary>
         /// Logs a message into a file given the global path and level.
         /// </summary>
         /// <param name="Msg">Message Log to store.</param>
-        public static void LogToFile(string Msg)
+        public void LogToFile(string msg, string logLevel)
         {
-            if (LogLevel == "")
+            if (logLevel == Cfg.LoggingLevel)
             {
-                if (File.Exists(LogPath))
+                if (File.Exists(Cfg.LoggingPath))
                 {
                     try
                     {
-                        File.AppendAllText(LogPath, Msg);
+                        File.AppendAllText(Cfg.LoggingPath, msg);
                     }
                     catch (Exception e)
                     {
@@ -99,7 +179,7 @@ namespace TelegramSharp.Core
                 {
                     try
                     {
-                        File.WriteAllText(LogPath, Msg);
+                        File.WriteAllText(Cfg.LoggingPath, msg);
                     }
                     catch (Exception e)
                     {

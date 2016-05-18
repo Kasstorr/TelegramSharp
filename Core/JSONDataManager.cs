@@ -39,7 +39,7 @@ namespace TelegramSharp.Core {
 					foreach (Update upd in serverUpdate.Result) {
 						Offset = upd.UpdateId;
                         bot.Parser.ParseMessage(upd.Message, bot);
-						Logger.LogConsoleWrite (upd.Message, bot.BotIdentity);
+						ConsoleLogger.LogMsgToConsole (upd.Message, bot.BotIdentity);
 					}
 				}
 			//}
@@ -59,12 +59,11 @@ namespace TelegramSharp.Core {
 			try {
 				GetMeServerUpdate serverUpdate = JsonConvert.DeserializeObject<GetMeServerUpdate> (inJson);
 				if (serverUpdate.GetMe != null)
-					Logger.LogWrite (serverUpdate.GetMe);
+					ConsoleLogger.GetBotLog (serverUpdate.GetMe);
 				bot.BotIdentity = serverUpdate.GetMe;
 				return serverUpdate.GetMe;
-			} catch (JsonReaderException) {
-				Console.WriteLine ("ERROR: Server not returned a valid JSON, chek your token and connection.");
-				Console.WriteLine ("Returned from the website: " + inJson);
+			} catch (JsonReaderException e) {
+				Logger.Error ("ERROR: Server not returned a valid JSON, chek your token and connection. From the website: " + inJson, e);
 			}
 			return null;
 		}

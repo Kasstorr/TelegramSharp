@@ -19,12 +19,12 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle ("TelegramAPI")]
-[assembly: AssemblyDescription ("")]
+[assembly: AssemblyTitle ("TelegramSharp")]
+[assembly: AssemblyDescription ("An Open Source library wrapper for telegram bot API.")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("")]
 [assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("Samuele Lorefice")]
+[assembly: AssemblyCopyright ("Kasstorr")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 

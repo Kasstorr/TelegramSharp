@@ -1,4 +1,4 @@
-//TelegramSharp - A library to make telegram bots
+﻿//TelegramSharp - A library to make telegram bots
 //Copyright (C) 2016  Samuele Lorefice
 //
 //This program is free software: you can redistribute it and/or modify
@@ -16,35 +16,39 @@
 using System;
 using TelegramSharp.Core.Objects.NetAPI;
 
-namespace TelegramSharp{
-	/// <summary>
-	/// Message Logger.
-	/// </summary>
-	public static class ConsoleLogger {
+namespace TelegramSharp
+{
+    /// <summary>
+    /// Message Logger.
+    /// </summary>
+    public static class ConsoleLogger
+    {
 
-		/// <summary>
-		/// Logs a message to the console.
-		/// </summary>
-		/// <param name="msgToLog">Message to log.</param>
-		public static void LogMsgToConsole (Message msgToLog, User Bot) {
-			Console.WriteLine (String.Format("{0},{4}|INFO|{1}|From chat {2}, by {5} Message: {3}", DateTime.Now.ToString(), Bot.Username, (msgToLog.Chat.Title + " " + msgToLog.Chat.Username), msgToLog.Text, DateTime.Now.Millisecond, msgToLog.From.Id+" "+msgToLog.From.FirstName+" "+msgToLog.From.LastName));
-		}
+        /// <summary>
+        /// Logs a message to the console.
+        /// </summary>
+        /// <param name="msgToLog">Message to log.</param>
+        public static void LogMsgToConsole(Message msgToLog, User Bot)
+        {
+            Console.WriteLine(String.Format("{0},{4:ffff}|INFO|{1}|From chat {2}, by {5} Message: {3}", DateTime.Now.ToString(), Bot.Username, (msgToLog.Chat.Title + " " + msgToLog.Chat.Username), msgToLog.Text, DateTime.Now.Millisecond, msgToLog.From.Id + " " + msgToLog.From.FirstName + " " + msgToLog.From.LastName));
+        }
 
-		/// <summary>
-		/// Logs the bot identity.
-		/// </summary>
-		/// <param name="getMe">Get me.</param>
-		public static void GetBotLog (User getMe) {
-			Console.WriteLine ("");
-			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine ("***Received Bot Identity***");
-			Console.ForegroundColor = ConsoleColor.Yellow;
-			Console.WriteLine ("Name: " + getMe.FirstName + " " + getMe.LastName);
-			Console.WriteLine ("Username: @" + getMe.Username + " ID: " + getMe.Id);
-			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine ("***End of Bot Identity***");
-			Console.WriteLine ("");
-		}
-	}
+        /// <summary>
+        /// Logs the bot identity.
+        /// </summary>
+        /// <param name="getMe">Get me.</param>
+        public static void GetBotLog(User getMe)
+        {
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("***Received Bot Identity***");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Name: " + getMe.FirstName + " " + getMe.LastName);
+            Console.WriteLine("Username: @" + getMe.Username + " ID: " + getMe.Id);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("***End of Bot Identity***");
+            Console.WriteLine("");
+        }
+    }
 }
 

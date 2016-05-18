@@ -23,12 +23,23 @@ namespace TelegramSharp.Core.Objects {
 	/// </summary>
 	[DataContract]
 	public class BotSetup {
+
+        /// <summary>
+        /// Gets or sets the library version.
+        /// </summary>
+        /// <value>The library version.</value>
+        [DataMember] public Version LibVersion { get; set; }
 		/// <summary>
 		/// Gets or sets the bot token.
 		/// </summary>
 		/// <value>The bot token.</value>
 		[DataMember] public string BotToken { get; set; }
 
+        /// <summary>
+        /// Gets or sets the default logging config file path.
+        /// </summary>
+        /// <value>The logging configuration file path.</value>
+        [DataMember] public string DefLogConfigFilePath { get; set; }
         /// <summary>
         /// Gets or sets the path to the log file.
         /// </summary>
@@ -40,5 +51,11 @@ namespace TelegramSharp.Core.Objects {
         /// </summary>
         /// <value>The logging level.</value>
         [DataMember] public string LoggingLevel { get; set; }
+
+        /// <summary>
+        /// Gets or sets verbose mode.
+        /// </summary>
+        /// <value>The verbosity of logging to terminal</value>
+        [DataMember] public bool VerboseMode { get; set; }
 	}
 }
