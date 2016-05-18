@@ -27,6 +27,18 @@ namespace TelegramSharp.Core.Objects {
 		/// Gets or sets the bot token.
 		/// </summary>
 		/// <value>The bot token.</value>
-		[DataMember] public string BotToken{ get; set; }
+		[DataMember] public string BotToken { get; set; }
+
+        /// <summary>
+        /// Gets or sets the path to the log file.
+        /// </summary>
+        /// <value>The path to the log file.</value>
+        [DataMember] public string LoggingPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the logging level.
+        /// </summary>
+        /// <value>The logging level.</value>
+        [DataMember] public string LoggingLevel { get; set; }
 	}
 }

@@ -61,8 +61,8 @@ namespace TelegramSharp.Core {
                     }
                 }
             } catch (Exception e) {
-                Console.WriteLine("Exception generated, see Error.log");
-                System.IO.File.AppendAllText("Error.log", "\nError generated on " + DateTime.Now.ToString() + "\n" + e.ToString());
+
+                Logger.Error("Missing configuration, compile the generated config file and restart the program or pass a reference to a CFG class containing all the fields", e);
             }
         }
 
